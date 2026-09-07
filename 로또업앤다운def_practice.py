@@ -4,6 +4,10 @@ lotto_history = []
 
 ranking = []
 
+def lotto_sort(lotto):
+    lotto.sort()
+    print(lotto)
+
 def update_ranking(nickname,attempt):
     for player in ranking:
         if player[0] == nickname:
@@ -13,31 +17,36 @@ def update_ranking(nickname,attempt):
 
     ranking.append([nickname,attempt])
 
+def difficulty_select_message(number):
+
+    if number == 1:
+        return "쉬움", "시도 횟수 제한이 없습니다.", 0
+    elif number == 2:
+        return "중간", "최대 10회까지 시도할 수 있습니다.", 10
+    elif number == 3:
+        return "어려움", "최대 5회까지 시도할 수 있습니다.", 5
+
+    return None
+
+
 def difficulty_select():
+
+    print("난이도를 선택해주세요!")
     print("1. 쉬움 - 횟수 제한 없음")
     print("2. 중간 - 10회 제한")
     print("3. 어려움 - 5회 제한")
-    print()
-    print("난이도를 선택해주세요!")
-
 
     difficulty = int(input())
+    result = difficulty_select_message(difficulty)
 
-    if difficulty == 1:
-        print("쉬움 난이도를 선택하셨습니다! ",end="")
-        print("(시도 횟수 제한이 없습니다.)")
-        return 0
-    elif difficulty == 2:
-        print("중간 난이도를 선택하셨습니다! ",end="")
-        print("(최대 10회까지 시도할 수 있습니다.)")
-        return 10
-    elif difficulty == 3:
-        print("어려움 난이도를 선택하셨습니다! ",end="")
-        print("(최대 5회까지 시도할 수 있습니다.)")
-        return 5
+    if result is None:
+        print("올바르지 않은 난이도입니다!")
+        return None
 
-    print("올바르지 않은 난이도입니다!")
-    return None
+    difficulty_name, message, max_attempt = result
+    print(f"{difficulty_name} 난이도를 선택하셨습니다!")
+    print(message)
+    return max_attempt
 
 def play_up_down():
     print("****** 숫자 UP & DOWN 게임에 오신걸 환영합니다! ******")
@@ -188,8 +197,7 @@ def lotto_selectmode():
 
                 print("이미 입력한 숫자입니다! 다른 숫자를 입력해주세요!")
 
-            lotto.sort()
-            print(lotto)
+            lotto_sort(lotto)
 
         elif wantnum == 0:
 
@@ -200,9 +208,7 @@ def lotto_selectmode():
                 if x not in lotto:
                     lotto.append(x)
 
-            lotto.sort()
-
-            print(lotto)
+            lotto_sort(lotto)
 
         else:
 
@@ -270,3 +276,6 @@ def main():
             print("올바르지 않은 번호입니다!")
 
 main()
+
+
+
