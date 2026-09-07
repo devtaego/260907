@@ -29,22 +29,15 @@ def difficulty_select():
         return 0
     elif difficulty == 2:
         print("중간 난이도를 선택하셨습니다! ",end="")
-        print()
         print("(최대 10회까지 시도할 수 있습니다.)")
         return 10
     elif difficulty == 3:
         print("어려움 난이도를 선택하셨습니다! ",end="")
-        print()
         print("(최대 5회까지 시도할 수 있습니다.)")
         return 5
 
     print("올바르지 않은 난이도입니다!")
     return None
-
-
-def select_num():
-    num = int(input())
-    return num
 
 def play_up_down():
     print("****** 숫자 UP & DOWN 게임에 오신걸 환영합니다! ******")
@@ -223,17 +216,18 @@ def lotto_record():
     if len(lotto_history) == 0:
         print("로또 번호 이력이 존재하지 않습니다!")
         print()
+        return
 
 
     print("****** 로또 번호 이력 ******")
     print()
 
-    for i, v in enumerate(lotto_history):
+    for i, lotto in enumerate(lotto_history, start = 1):
 
-        print(f"{i + 1}회차 번호 : ", end="")
+        print(f"{i}회차 번호 : ", end="")
 
-        for j in range(6):
-            print(lotto_history[i][j], end=" ")
+        for number in lotto:
+            print(number, end=" ")
 
         print()
 
@@ -256,9 +250,6 @@ def lotto_menu():
         else:
             print("올바르지 않은 번호입니다! 다시 입력하세요.")
             print()
-
-def lottery():
-    print()
 
 def main():
     print("메뉴를 선택해주세요!")
